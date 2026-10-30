@@ -1,166 +1,151 @@
-# KIT-Physik-Praktikum-LaTeX-Vorlage-P3-P4
-Diese LaTeX-Vorlage ist geeignet für das Fortgeschrittenenpraktikum P3 (P3-T1) und das Masterpraktikum P4 (P3-T2) der Fakultät für Physik am Karlsruher Institut für Technologie. Es wird die Verwendung von Overleaf empfohlen.
+# KIT Physics Lab Report LaTeX Template (P3/P4)
 
-## Import der Vorlage
-1. Richte dir deine Arbeitsumgebung ein. Dafür kannst du gerne einen lokalen Compiler verwenden, wir empfehlen aber immer [Overleaf](https://www.overleaf.com/).
-   1. Gehe auf den **Log In**-Button.
-   2. Scrolle runter und klicke auf **Log in through your institution**.
-   4. Melde dich, wie von zum Beispiel ILIAS gewohnt, mit deinem KIT-Account an.
-2. Lade dir das Projekt als ZIP-Datei über den grünen Button "Code" und dannn als "Download ZIP" herunter.
-3. In **Overleaf** musst du auf **New project** klicken, dort **Upload project** auswählen und die soeben heruntergeladene ZIP-Datei dort hochladen.
+This LaTeX template is intended for the Advanced Physics Lab P3 (P3-T1) and the Master's Physics Lab P4 (P3-T2) at the Department of Physics, Karlsruhe Institute of Technology (KIT). Overleaf is recommended, but the project can also be compiled locally.
 
-## Verwendung
-1. In die main.tex wird kein Inhalt geschrieben. Hier werden bei Bedarf benötigte Pakete hinzugefügt oder weitere Kapitel(Aufgaben) importiert.
-2. Füllt die Datei Deckblatt.tex im Ordner chapters mit euren Daten aus.
-3. Schreibt eure Vorbereitung in den Versuch unter chapters/Vorbereitung.tex. Im Inhaltsverzeichnis erhält die Versuchsvorbereitung keine Kapitelnummer um die von der Fakultät gegebenen Protokollanforderungen zu erfüllen.
-4. Laut Vorgabe der Fakultät soll das erste Kapitel die theoretischen Grundlagen des Versuchs erklären. Dies fällt häufig mit der Versuchsvorbereitung zusammen. Die Versuchsvorbereitung kann in diesem Fall entfernt werden.
-5. Das zweite Kapite beinhaltet den experimentellen Versuchsaufbau, das dritte die Durchführung und das vierte kapitel beinhaltet die Auswertung samt Fehlerrechnung. 
-6. Anhänge wie Grafiken oder das Messprotokoll werden im Ordner include abgelegt. Es macht Sinn für jedes Kapitel einen Unterordner in include anzulegen um Ordnung zu bewahren. Somit könnt ihr die Grafiken schneller wieder finden, wenn sie ausgetauscht werden müssen.
-7. Tauscht die Dateien Aufgabenblatt.pdf und Messptrotokoll.pdf durch das entsprechende Aufgabenblatt und euer eingescanntes, unterschriebenes Messprotokoll aus.
 
-## Codeschnipsel für die wichtigsten Dinge
+## Getting Started
 
-Hier findest du eine Auflistung an wichtigen Beispielen, die für LaTeX-Neulinge sehr hilfreich sein können.
+1. Download the project as a ZIP archive using **Code** > **Download ZIP**.
+2. In [Overleaf](https://www.overleaf.com/), choose **New Project** > **Upload Project** and select the ZIP archive.
 
-### Bilder/Grafik einfügen
+You can also compile locally with `latexmk -pdf main.tex` and a recent LaTeX distribution. Keep `labreport.cls` and the `include/` directory alongside `main.tex`.
 
-```
-\begin{figure}[h] % h for here; t for top; b for bottom; ! overrides internal parameters LaTeX uses for determining "good" float positions
-\centering % Zentrieren der Grafik horizontal auf der Seite
-    \includegraphics{include/Foto.png} % Lade die Datei Foto.png aus dem include-Ordner
-    \caption{} % Bildunterschrift
-    \label{} % Label zum refenzieren mit \ref{}
+## Report Structure
+
+`main.tex` assembles the report in this order:
+
+1. Cover page with the experiment name, group members, group number, and experiment date.
+2. Brief introduction.
+3. Aim and theoretical background.
+4. Experimental setup.
+5. Procedure.
+6. Evaluation of measured data, including formulas, uncertainty calculation, and results.
+7. Discussion of results.
+8. References.
+9. Copy of the original measurement protocol as the final appendix.
+
+## Project Files
+
+- `chapters/cover-page.tex` contains the cover fields. Update the experiment name, student names, group number, and experiment date; choose the matching group-day marker.
+- `chapters/introduction.tex` contains the brief introduction.
+- `chapters/aim-and-theoretical-background.tex` covers the experiment aim and theory.
+- `chapters/experimental-setup.tex` describes the apparatus and setup.
+- `chapters/procedure.tex` describes how the experiment was conducted.
+- `chapters/data-evaluation-and-uncertainty-calculation.tex` provides sections for measured data, evaluation formulas, uncertainty calculation, and results.
+- `chapters/discussion-of-results.tex` is reserved for interpretation and limitations.
+- `chapters/references.tex` loads `include/references.bib`.
+- `include/cover-page.pdf` is the cover artwork. `include/original-measurement-protocol.pdf` is included at the end of the report; replace it with a copy of the completed original protocol.
+- `include/assignment-sheet.pdf` is retained as a course reference and is not included in the report.
+- `main.tex` controls the order of all sections and the appendix. Keep its imports aligned with the required report sequence.
+
+## Shared LaTeX Configuration
+
+`labreport.cls` contains the document class settings, shared package imports, and English cover metadata commands. Keep it beside `main.tex`. The main file selects the class and assembles the report; enter cover details in `chapters/cover-page.tex`.
+
+Chapter and asset names use lowercase kebab-case. Cover metadata commands use English camelCase names such as `\experimentName` and `\groupNumber`.
+
+Place visual assets in these directories:
+
+- `include/graphics/` for diagrams and other figures.
+- `include/photos/` for experiment and apparatus photos.
+- `include/plots/` for generated plots.
+
+## LaTeX Examples
+
+### Figures
+
+```latex
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{include/graphics/figure.pdf}
+    \caption{Figure caption.}
+    \label{fig:example}
 \end{figure}
 ```
 
-Unterstützte Dateiformate: `*.png`, `*.jpg`, `*.jpeg`, `*.pdf`
+Supported image formats include PNG, JPG, JPEG, and PDF. Store photos in `include/photos/`, plots in `include/plots/`, and other figures in `include/graphics/`. Reference the figure with `\ref{fig:example}`.
 
-### Tabellen einfügen
+### Tables
 
-```
-\begin{table}[!htb] % h for here; t for top; b for bottom; ! overrides internal parameters LaTeX uses for determining "good" float positions
-    \centering % Zentrieren der Tabelle auf der Seite
-    \caption{} % Tabellen haben Überschriften!
-    \label{} % Label zum refenzieren mit \ref{}
-    \bigskip % Sorge dafür, dass die Überschrift nicht an der Tabelle klebt
-     \begin{tabular}{ccc} % Tabelle mit drei Spalten mit Trennstrichen, deren Inhalte mittig zentriert sind
-	\toprule
-	Text & Text & Text\\ % Spaltenbezeichungen
-	\midrule
-	Text & Text & Text\\ % Tabelleninhalt
-	\hline
-	Text & Text & Text\\ % Tabelleninhalt
-	\hline
-	Text & Text & Text\\ % Tabelleninhalt
-	\bottomrule
+```latex
+\begin{table}[htbp]
+    \centering
+    \caption{Table caption.}
+    \label{tab:example}
+    \begin{tabular}{ccc}
+        \toprule
+        Column 1 & Column 2 & Column 3 \\
+        \midrule
+        Value & Value & Value \\
+        \bottomrule
     \end{tabular}
 \end{table}
 ```
 
-Solltest du die Daten bereits in einer `*.csv`-Datei haben, so kannst du diese auch einfach mithilfe von diesem 
-Code-Schnipsel aus Dateien auslesen und dir anzeigen lassen.
+For CSV data, use `\pgfplotstabletypeset` (provided by `pgfplotstable`, loaded in `labreport.cls`):
 
-```
-\begin{table}[]
-    \centering
-    \caption{} % Tabellenüberschrift
-    \label{} % Label der Tabelle fürs referenzieren
-    \bigskip % Stelle sicher, dass die Überschrift nicht an der Tabelle klebt
-    \pgfplotstabletypeset[
-        columns={Nr,Length(um),Depth(nm)}, % Spalten aus der CSV-Datei, die importiert werden sollen
-        % Die folgenden Parameter geben für jede Spalte an:
-        % column name={Bezeichung der Spalte}
-        % precision=Anzahl der Stellen, die Zahlen in der Spalte haben sollen
-        % fixed zerofill -> Fülle mit Nullen auf, sollte der Wert nicht die Länge der precision haben
-        % fixed -> Runde die Zahlen auf die precision
-        % column type = {r} -> Wie ist die Spalte ausgerichtet (r: rechtsbündig, l: linksbündig, c: zentriert)
-        display columns/0/.style={column name={Nr.}, precision=0, fixed zerofill, column type = {r}},
-        display columns/1/.style={column name={Länge $l$ ($\si{\micro\meter}$)}, precision=1, fixed, fixed zerofill, column type = {r}},
-        display columns/2/.style={column name={Tiefe $t$ ($\si{nm}$)}, precision=0, fixed zerofill, column type = {r}},
-        ]{Daten.csv} % Lese die Daten aus der Daten.csv-Datei aus
-\end{table}
+```latex
+\pgfplotstabletypeset[
+    columns={Nr,Length(um),Depth(nm)},
+    display columns/0/.style={column name={No.}, precision=0, fixed zerofill},
+    display columns/1/.style={column name={Length $l$ ($\si{\micro\meter}$)}, precision=1, fixed},
+    display columns/2/.style={column name={Depth $d$ ($\si{\nano\meter}$)}, precision=0, fixed zerofill},
+]{include/data.csv}
 ```
 
-### Referenzierung
-Die Referenzierung von Objekten ist recht einfach. Dafür muss an der Stelle, die referenziert werden soll, ein
-`\label{Beispielname}` erstellt werden, um dann mit `\ref{Beispielname}` darauf verweisen zu können. Dabei gilt,
-dass jeder Name nur einmal mit dem `\label`-Befehl definiert werden darf, denn sonst kann LaTeX die Referenz nicht mehr 
-eindeutig identifizieren.
+### Cross-References
 
-```
-Dies ist ein Beispieltext, der auf ein Beispielbild in Abbildung \ref{Beispielname} zeigt.
+Place a unique label after the caption or heading, then reference it in the text:
+
+```latex
+See Figure \ref{fig:example}.
 ```
 
-### Formeln
+### Equations and Quantities
 
-```
-\begin{equation} % equation Umgebung wird für einzeilige Gleichungen verwendet
-  a^2 + b^2 = c^2
-  \label{} % Label zum refenzieren mit \ref{}
+Use `equation` for a single equation and `align` for aligned equations:
+
+```latex
+\begin{equation}
+    a^2 + b^2 = c^2
+    \label{eq:pythagorean}
 \end{equation}
-```
 
-Die align Umgebung wird für mehrzeilige Gleichungen verwendet. Die Gleichungen werden am Gleichheitszeichen (&=) ausgerichtet  
-```
 \begin{align}
-  a^2 + b^2 &= c^2\\
-  c^2 &= a^2 + b^2
-  \label{} % Label zum refenzieren mit \ref{}
+    a^2 + b^2 &= c^2 \\
+    c^2 &= a^2 + b^2
+    \label{eq:rearranged}
 \end{align}
 ```
 
-Eine relativ ausführliche Übersicht der verfügbaren Zeichen kann
-[hier](https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole) gefunden werden.
+Format values with units using `siunitx`:
 
-### Wertangabe
-
-Entweder:
-```
+```latex
 \begin{equation}
-  \mathrm{Name} = \SI{Wert}{Einheit}
+    \mathrm{Length} = \SI{12.3}{\micro\meter}
 \end{equation}
 ```
 
-oder
-```
+Report measured values with statistical and systematic uncertainties as required by the course, for example:
+
+```latex
 \begin{equation}
-  \mathrm{Name} = Wert\,\mathrm{Einheit}
+    x = \SI{12.3(2)(1)}{\micro\meter}
 \end{equation}
 ```
 
-#### Fehler-Rechnung Wertangabe:
-Die Angabe von Ergebnissen der Fehlerrechnung erfolgt nach dem Schema:
-> Ergebnis = Messwert +/- statistischer Fehler +/- systematischer Fehler
+### Footnotes and Lists
 
-```
-\begin{equation}
-  \mathrm{Name} = Wert \pm Wert \mathrm{(\delta_{stat})} \pm Wert \mathrm{(\delta_{sys})}\mathrm{Einheit}
-\end{equation}
-```
+```latex
+Text with a footnote.\footnote{Source or additional note.}
 
-### Fußnote
-
-Kann im Text eingebaut werden. Eine Fußnote erscheint im Text. Der Inhalt erscheint im Footer der Seite
-
-```
-\footnote{Quelle}
-```
-
-### Listen
-
-#### Umnummerierte Listen
-
-```
 \begin{itemize}
-\item Listenpunkt 1
-\item Listenpunkt 2
+    \item An unnumbered item
+    \item Another unnumbered item
 \end{itemize}
-```
 
-#### Nummerierte Listen
-```
-\begin{enumerate} 
-    \item Ein Stichpunkt
-    \item Noch ein Stichpunkt 
+\begin{enumerate}
+    \item A numbered item
+    \item Another numbered item
 \end{enumerate}
 ```

@@ -1,0 +1,39 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Index and glossary artifacts
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ilg
+*.idx
+*.ind
+*.ist
+
+# Build directories and generated root PDF
+/_build/
+/build/
+/main.pdf
+/_minted-*/
+
+# Editor and operating-system artifacts
+*.bak
+*~
+.DS_Store
