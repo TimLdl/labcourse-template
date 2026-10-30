@@ -2,11 +2,11 @@
 
 This LaTeX template is intended for the Advanced Physics Lab P3 (P3-T1) and the Master's Physics Lab P4 (P3-T2) at the Department of Physics, Karlsruhe Institute of Technology (KIT). Overleaf is recommended, but the project can also be compiled locally.
 
-
 ## Getting Started
 
 1. Download the project as a ZIP archive using **Code** > **Download ZIP**.
 2. In [Overleaf](https://www.overleaf.com/), choose **New Project** > **Upload Project** and select the ZIP archive.
+3. Sign in through your institution with your KIT account if prompted.
 
 You can also compile locally with `latexmk -pdf main.tex` and a recent LaTeX distribution. Keep `labreport.cls` and the `include/` directory alongside `main.tex`.
 

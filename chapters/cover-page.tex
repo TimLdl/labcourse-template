@@ -19,7 +19,9 @@
     \node at (current page.center) {\includegraphics[page=1]{include/cover-page.pdf}};
     \begin{scope}[shift={(current page.south west)},every node/.style={anchor=base west}]
         \node at (5.8cm,23.1cm){\Large{\groupNumber}};
-        \node at (\groupDayPosition) {\scalebox{4}{{$\mathbf{\times}$}}};
+        \ifx\groupDayPosition\empty\else
+          \node at (\groupDayPosition) {\scalebox{4}{{$\mathbf{\times}$}}};
+        \fi
         \node at (16cm,23.1cm) {\Large{\term}};
         \node at (4.8cm,21.2cm){\Large{\experimentName}};
         \node at (4.8cm,19.6cm){\Large{\studentOneName\hspace{0.2222em}(\studentOneEmail)}};
@@ -32,8 +34,8 @@
 \hypersetup{
   pdftitle    = {\labCourse\hspace{0.2222em}Lab Report - \experimentName},
   pdfsubject  = {Report for experiment \experimentName\hspace{0.2222em}on \experimentDate},
-  pdfauthor   = {\studentOneName\hspace{0.2222em}and\hspace{0.2222em}\studentTwoName\hspace{0.2222em}(Group \groupDay-\groupNumber)},
-  pdfkeywords = {KIT, Physics, Laboratory, Lab Report, \labCourse, \experimentName, \term, \studentOneName, \studentTwoName},
+  pdfauthor   = {KIT Physics Laboratory},
+  pdfkeywords = {KIT, Physics, Laboratory, Lab Report, \labCourse, \experimentName},
   pdfcreator  = {pdflatex},
   pdfproducer = {LaTeX with hyperref}
 }
